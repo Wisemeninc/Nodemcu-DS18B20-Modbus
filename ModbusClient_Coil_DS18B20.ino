@@ -1,5 +1,5 @@
 /*
-  Originaly By Yaser Ali Husen
+  By Yaser Ali Husen
   This program to control PLC Siemens S7-1200 from ESP8266 using modbus TCP communication
   PLC S7 as modbus TCP server
   ESP8266 as modbus Client
@@ -34,6 +34,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 int deviceCount = 0;
+
 // current temperature & humidity, updated in loop()
 float t = 0.0;
 float h = 0.0;
@@ -50,11 +51,11 @@ bool status_button3 = false;
 //millis================================
 //Set every 5 sec read sensor
 unsigned long previousMillis = 0;  // variable to store the last time the task was run
-const long interval = 5000;        // time interval in milliseconds (eg 1000ms = 1 second)
+const long interval = 1000;        // time interval in milliseconds (eg 1000ms = 1 second)
 //======================================
 
 void setup() {
-  // DS18B20 sensor
+  // DS18b20 sensor
   sensors.begin();
   Serial.begin(9600);
 
@@ -76,7 +77,21 @@ void setup() {
   deviceCount = sensors.getDeviceCount();
   Serial.print(deviceCount);
   Serial.println(" devices");
+  // determine how many DS18B20 sensors are present
 
+  uint8_t address[8];
+ 
+  if(sensors.getAddress(address, 0)){
+    Serial.print("Address fetched:");
+  }else{
+    Serial.println("Error fetching the address");
+    return;
+  }
+ 
+  for(int i = 0; i<8; i++){
+    Serial.printf("%02X ",address[i]);
+  }
+  
   mb.client();
 
   //Setup Pin
@@ -93,9 +108,7 @@ void loop() {
   if (currentMillis - previousMillis >= interval) {
     // Save the last time the task was run
     previousMillis = currentMillis;
-    //read DHT-11---------------------------------------
-    //t = dht.readTemperature();
-    //h = dht.readHumidity();
+    //read DS18B20---------------------------------------
     sensors.requestTemperatures(); 
     float t = sensors.getTempCByIndex(0);
     //Serial.print("Humidity = ");
@@ -105,7 +118,7 @@ void loop() {
     Serial.print(t);
     Serial.print(" \xC2\xB0"); // shows degree symbol
     Serial.println(" C ");
-    //read DHT-11---------------------------------------
+    //read DS18B20---------------------------------------
     //split decimal and integer value
     //temperature
     int t_int = int(t);
