@@ -1,5 +1,5 @@
 /*
-  By Yaser Ali Husen
+  Originally by Yaser Ali Husen
   This program to control PLC Siemens S7-1200 from ESP8266 using modbus TCP communication
   PLC S7 as modbus TCP server
   ESP8266 as modbus Client
