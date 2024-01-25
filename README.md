@@ -7,4 +7,4 @@ DS18B20 - ESP8266 / ESP32 - Modbus
 https://modbus.org/docs/Modbus_Messaging_Implementation_Guide_V1_0b.pdf
 
 ![image](https://github.com/Wisemeninc/Nodemcu-DS18B20-Modbus/assets/80552061/0af1a9cb-63f4-46fe-be8a-14afc1be2838)
-https://support.industry.siemens.com/forum/dk/en/postattachments/image/?attachmentId=126908
+https://support.industry.siemens.com/forum/dk/en/posts/modbus-tcp-issues-in-simultaneous-connection-with-mb-server-one-client-third-party-with-2-connections-one-server-s71200/222089
