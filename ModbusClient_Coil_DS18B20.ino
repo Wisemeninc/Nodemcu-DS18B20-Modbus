@@ -17,7 +17,8 @@
 #include <ModbusIP_ESP8266.h>
 
 //-----------For modbus------------
-IPAddress remote(192, 168, 1, 201);  // Address of Modbus Slave device
+const int MODBUS_PORT = 502; // Modbus TCP port (default is 502)
+IPAddress remote(192, 168, 1, 201, MODBUS_PORT);  // Address of Modbus Slave device
 ModbusIP mb;                         //ModbusIP object
 const int REG = 100;                 // Modbus Coils Offset
 //-----------For modbus------------
