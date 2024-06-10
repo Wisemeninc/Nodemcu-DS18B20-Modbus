@@ -17,8 +17,8 @@
 #include <ModbusIP_ESP8266.h>
 
 //-----------For modbus------------
-const int MODBUS_PORT = 502; // Modbus TCP port (default is 502)
-IPAddress remote(192, 168, 1, 201, MODBUS_PORT);  // Address of Modbus Slave device
+// const int MODBUS_PORT = 502; // Modbus TCP port (default is 502)
+IPAddress remote(192, 168, 250, 6);  // Address of Modbus Slave device
 ModbusIP mb;                         //ModbusIP object
 const int REG = 100;                 // Modbus Coils Offset
 //-----------For modbus------------
@@ -60,7 +60,7 @@ void setup() {
   sensors.begin();
   Serial.begin(9600);
 
-  WiFi.begin("ssid", "pwpwpwpwpwpw");
+  WiFi.begin("modbusAP", "pwpwpwpwpwpw");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
